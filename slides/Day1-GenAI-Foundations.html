@@ -1,0 +1,693 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Day 1 Generative AI foundations for B.Sc. Computer Science students">
+  <title>Day 1 — Generative AI Foundations</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --ink: #edf2f7;
+      --muted: #9eacbd;
+      --surface: #111a24;
+      --surface-raised: #182431;
+      --line: #2a3948;
+      --accent: #ff5b83;
+      --accent-2: #dce4ef;
+      --warning: #ffcd8b;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      background: #0a1119;
+      color: var(--ink);
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+    }
+
+    .deck {
+      position: relative;
+      width: min(100vw, 1440px);
+      height: min(100vh, 810px);
+      min-height: 540px;
+      padding: clamp(24px, 5vw, 76px) clamp(26px, 7vw, 108px) 84px;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse at 86% 12%, rgb(130 230 208 / 10%), transparent 30%),
+        linear-gradient(135deg, #101923 0%, #111a24 55%, #101b25 100%);
+    }
+
+    .deck::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 7px;
+      background: linear-gradient(var(--accent), var(--accent-2));
+    }
+
+    .slide {
+      display: none;
+      height: 100%;
+      animation: arrive 220ms ease-out;
+    }
+
+    .slide.active { display: flex; flex-direction: column; }
+
+    @keyframes arrive {
+      from { opacity: .35; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .eyebrow {
+      margin: 0 0 18px;
+      color: var(--accent);
+      font-size: .78rem;
+      font-weight: 750;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+    h1 {
+      max-width: 900px;
+      margin-bottom: 20px;
+      font-size: clamp(3rem, 7.5vw, 6.7rem);
+      line-height: .98;
+      letter-spacing: -.065em;
+    }
+
+    h2 {
+      max-width: 1000px;
+      margin-bottom: 28px;
+      font-size: clamp(2.2rem, 5vw, 4.2rem);
+      line-height: 1.02;
+      letter-spacing: -.05em;
+    }
+
+    h3 {
+      margin-bottom: 10px;
+      color: var(--accent-2);
+      font-size: clamp(1.05rem, 2vw, 1.4rem);
+      line-height: 1.2;
+    }
+
+    p, li {
+      color: var(--muted);
+      font-size: clamp(1rem, 1.65vw, 1.38rem);
+      line-height: 1.5;
+    }
+
+    strong { color: var(--ink); }
+    .lede { max-width: 800px; font-size: clamp(1.25rem, 2.3vw, 1.8rem); }
+    .accent { color: var(--accent); }
+    .lime { color: var(--accent-2); }
+
+    .chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+    .chip {
+      padding: 9px 13px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: .95rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 4px;
+    }
+
+    .grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+    .card {
+      padding: clamp(17px, 2.2vw, 27px);
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      background: rgb(24 36 49 / 78%);
+    }
+
+    .card p:last-child { margin-bottom: 0; }
+    .card p, .card li { font-size: clamp(.98rem, 1.45vw, 1.2rem); }
+    ul, ol { margin: 0; padding-left: 1.2em; }
+    li + li { margin-top: 8px; }
+
+    .equation {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(12px, 3vw, 40px);
+      margin: 22px 0 28px;
+      text-align: center;
+    }
+
+    .equation span { font-size: clamp(1.1rem, 2.3vw, 1.8rem); font-weight: 700; }
+    .equation b { color: var(--accent); font-size: 1.5rem; }
+    .big-number {
+      color: var(--accent);
+      font-size: clamp(2.8rem, 6vw, 5.2rem);
+      font-weight: 800;
+      letter-spacing: -.06em;
+      line-height: 1;
+    }
+
+    .prompt {
+      padding: 22px 25px;
+      border-left: 3px solid var(--accent);
+      border-radius: 0 12px 12px 0;
+      background: #0b141d;
+      color: var(--ink);
+      font: 1.05rem/1.6 ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+
+    .prompt.bad { border-color: #ff9a87; }
+    .prompt.good { border-color: var(--accent-2); }
+
+    .footer {
+      position: absolute;
+      right: clamp(26px, 7vw, 108px);
+      bottom: 28px;
+      left: clamp(26px, 7vw, 108px);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      color: #8292a4;
+      font-size: .85rem;
+    }
+
+    .progress {
+      height: 3px;
+      flex: 1;
+      overflow: hidden;
+      border-radius: 4px;
+      background: #263441;
+    }
+
+    .progress > span {
+      display: block;
+      width: 0;
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      transition: width 180ms ease;
+    }
+
+    .controls { display: flex; gap: 8px; }
+    button {
+      padding: 8px 11px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface-raised);
+      color: var(--ink);
+      font: inherit;
+      cursor: pointer;
+    }
+    button:hover { border-color: var(--accent); }
+    button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+    .notes {
+      position: absolute;
+      z-index: 3;
+      top: 24px;
+      right: 24px;
+      width: min(390px, calc(100vw - 48px));
+      max-height: calc(100% - 112px);
+      overflow: auto;
+      padding: 20px 22px;
+      border: 1px solid #496052;
+      border-radius: 14px;
+      background: #17241f;
+      box-shadow: 0 18px 60px rgb(0 0 0 / 40%);
+    }
+    .notes[hidden] { display: none; }
+    .notes h2 { margin-bottom: 12px; color: var(--accent-2); font-size: 1.1rem; letter-spacing: 0; }
+    .notes p, .notes li { font-size: .98rem; }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--warning);
+      font-size: .95rem;
+    }
+
+    .tag::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    .intro-slide {
+      display: none;
+      grid-template-columns: minmax(0, 1.15fr) minmax(280px, .75fr);
+      align-items: center;
+      gap: clamp(32px, 6vw, 88px);
+    }
+
+    .intro-slide.active { display: grid; }
+    .intro-slide .eyebrow { margin-bottom: 22px; }
+    .intro-copy h1 {
+      margin-bottom: 13px;
+      font-size: clamp(4.2rem, 8.6vw, 7.5rem);
+      line-height: .83;
+      letter-spacing: -.075em;
+      text-transform: uppercase;
+    }
+
+    .intro-copy h1 .accent { color: #ff648b; }
+    .intro-subtitle {
+      margin: 20px 0 15px;
+      color: #e8edf5;
+      font-size: clamp(1.3rem, 2.45vw, 2rem);
+      font-weight: 580;
+      letter-spacing: -.035em;
+    }
+
+    .bootcamp-label {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 7px 13px;
+      border-radius: 999px;
+      background: rgb(255 91 131 / 11%);
+      color: #ff9bb3;
+      font-size: .79rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .intro-divider {
+      width: 72px;
+      height: 2px;
+      margin: 29px 0 21px;
+      background: linear-gradient(90deg, #ff5b83, #dce4ef);
+    }
+
+    .intro-name {
+      margin-bottom: 5px;
+      color: #f5f7fb;
+      font-size: clamp(2rem, 3.25vw, 2.8rem);
+      font-weight: 720;
+      letter-spacing: -.055em;
+      line-height: 1;
+    }
+
+    .intro-role {
+      max-width: 610px;
+      margin-bottom: 8px;
+      color: #dce4ef;
+      font-size: clamp(1rem, 1.65vw, 1.3rem);
+      font-weight: 570;
+      line-height: 1.38;
+    }
+
+    .intro-history {
+      margin-bottom: 14px;
+      color: #aab5c4;
+      font-size: clamp(.92rem, 1.35vw, 1.08rem);
+      letter-spacing: .015em;
+    }
+
+    .intro-tagline {
+      max-width: 470px;
+      margin-bottom: 0;
+      color: #ffb6c8;
+      font-size: clamp(1rem, 1.55vw, 1.22rem);
+      font-weight: 560;
+      line-height: 1.42;
+    }
+
+    .intro-visual {
+      position: relative;
+      justify-self: end;
+      width: min(100%, 370px);
+      padding: 8px;
+      border-radius: 29px;
+      background: linear-gradient(145deg, rgb(255 255 255 / 13%), rgb(255 255 255 / 3%));
+      box-shadow: 0 28px 80px rgb(0 0 0 / 24%);
+    }
+
+    .intro-portrait {
+      display: block;
+      width: 100%;
+      height: clamp(370px, 57vh, 500px);
+      border-radius: 22px;
+      object-fit: cover;
+      object-position: center 18%;
+      filter: saturate(.62) contrast(1.03);
+    }
+
+    .intro-visual::after {
+      content: "";
+      position: absolute;
+      inset: 8px;
+      border-radius: 22px;
+      background: linear-gradient(180deg, transparent 62%, rgb(10 14 20 / 46%));
+      pointer-events: none;
+    }
+
+    .intro-logo {
+      position: absolute;
+      z-index: 1;
+      right: -24px;
+      bottom: 25px;
+      width: 112px;
+      height: 112px;
+      padding: 5px;
+      border-radius: 50%;
+      background: #10151d;
+      box-shadow: 0 12px 35px rgb(0 0 0 / 32%);
+    }
+
+    .intro-logo img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .intro-visual-caption {
+      position: absolute;
+      z-index: 1;
+      right: 105px;
+      bottom: 34px;
+      left: 26px;
+      color: #f5f7fb;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .15em;
+      line-height: 1.5;
+      text-transform: uppercase;
+    }
+
+    .intro-caption-dot { color: #ff6d91; }
+
+    @media (max-width: 680px) {
+      .deck { min-height: 100vh; height: 100vh; padding: 28px 22px 82px; overflow-y: auto; }
+      .grid, .grid.three { grid-template-columns: 1fr; gap: 10px; }
+      .card { padding: 14px 16px; }
+      .card p, .card li { font-size: .98rem; }
+      .footer { right: 22px; left: 22px; bottom: 20px; }
+      .equation { flex-wrap: wrap; }
+      .controls button { min-width: 42px; }
+      .intro-slide,
+      .intro-slide.active { display: flex; flex-direction: column; align-items: stretch; justify-content: flex-start; gap: 24px; }
+      .intro-copy h1 { font-size: clamp(3.9rem, 16vw, 6rem); }
+      .intro-visual { align-self: center; width: min(76%, 310px); }
+      .intro-portrait { height: min(48vh, 390px); }
+      .intro-logo { right: -18px; width: 88px; height: 88px; }
+      .intro-visual-caption { right: 78px; bottom: 28px; left: 20px; font-size: .64rem; }
+    }
+
+    @media (max-height: 650px) and (min-width: 681px) {
+      .intro-copy h1 { font-size: clamp(3.8rem, 7vw, 5.7rem); }
+      .intro-portrait { height: 390px; }
+      .intro-divider { margin: 18px 0 14px; }
+    }
+
+    @media print {
+      @page { size: 13.333in 7.5in; margin: 0; }
+      body { display: block; overflow: visible; background: white; }
+      .deck { width: 13.333in; height: 7.5in; padding: .65in .9in; overflow: hidden; break-after: page; print-color-adjust: exact; }
+      .slide { display: flex !important; flex-direction: column; animation: none; }
+      .footer, .notes { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="deck" aria-label="Day 1 Generative AI Foundations slide deck">
+    <section class="slide intro-slide active" aria-label="Slide 1">
+      <div class="intro-copy">
+        <p class="eyebrow">5 days · hands-on · built for CS students</p>
+        <h1>Beyond<br><span class="accent">ChatGPT</span></h1>
+        <p class="intro-subtitle">From AI Users to AI Creators</p>
+        <span class="bootcamp-label">Generative AI Workshop</span>
+        <div class="intro-divider" aria-hidden="true"></div>
+        <p class="intro-name">Bala Hari</p>
+        <p class="intro-role">Founder, CS Visually <span class="intro-caption-dot">/</span> GenAI Consultant, Thoughtworks</p>
+        <p class="intro-history">Ex-PayPal <span class="intro-caption-dot">·</span> Ex-Comcast <span class="intro-caption-dot">·</span> 5+ years in software engineering, data and AI</p>
+        <p class="intro-tagline">Building real-world AI systems. Helping students become AI-ready.</p>
+      </div>
+      <div class="intro-visual" aria-label="Bala Hari and CS Visually">
+        <img class="intro-portrait" src="assets/bala-hari-profile.jpeg" alt="Bala Hari" />
+        <div class="intro-visual-caption">Build with AI<br><span class="intro-caption-dot">Learn by creating</span></div>
+        <div class="intro-logo">
+          <img src="assets/cs-visually-logo.png" alt="CS Visually logo" />
+        </div>
+      </div>
+      <template class="notes">
+        <p><strong>Opening:</strong> “Vanakkam everyone! Naan Bala Hari. CS Visually-oda founder; Thoughtworks-la GenAI consultant-aa work panren. Software engineering, data, AI indha areas-la 5 years-ku mela experience irukku. PayPal, Comcast-layum work pannirukken.”</p>
+        <p>“Indha five days-la AI-kitta questions kekkaradhu mattum illa; AI-ai thoughtful-aa use pannavum, adhu solradha verify pannavum, namma own practical solutions create pannavum learn pannaporom. AI expert-aa inga vara vendiya avasiyam illa—curiosity irundha podhum.”</p>
+        <p><strong>Ask the room:</strong> “Ungalukku AI edhavadhu build panna, illa purinjikka help pannumna, neenga enna try panna virumbuveenga?” Konjam responses varattum; answer panna comfortable illa na pass pannalam-nu sollunga.</p>
+      </template>
+    </section>
+
+    <section class="slide" aria-label="Slide 2">
+      <p class="eyebrow">Day 01 / B.Sc. Computer Science</p>
+      <h1>Generative AI<br><span class="accent">Foundations</span></h1>
+      <p class="lede">From understanding how it works to using it thoughtfully in your CS learning.</p>
+      <div class="chips">
+        <span class="chip">No prior AI experience needed</span>
+        <span class="chip">Observe · try · verify</span>
+        <span class="chip">4 scheduled hours</span>
+      </div>
+      <template class="notes"><p>“Innikki namma Generative AI-oda basics paaka porom. AI pathi munnaadi therinjirukkanum, illa specific tool use pannirukkanum-nu expectation illa. CS concepts therinja helpful, aana beginner-aa irundhaalum easy-aa follow pannalaam.”</p><p>“Indha session-la oru simple habit follow pannuvom: observe, try, verify. AI answer kuduthaa appadiye accept pannama, adhu useful-aa irukka, correct-aa irukka-nu check pannuvom.” Students-ai, “Yaaravadhu AI tool try pannirukkeengala?” nu casual-aa kelunga; hands-up panna comfortable illa na pass pannalaam-nu sollunga.</p></template>
+    </section>
+
+    <section class="slide" aria-label="Slide 3">
+      <p class="eyebrow">Our route today</p>
+      <h2>Understand it.<br><span class="accent">Try it. Question it.</span></h2>
+      <div class="grid three">
+        <article class="card"><div class="big-number">30</div><h3>AI foundations</h3><p>AI, machine learning, Generative AI, and familiar CS examples.</p></article>
+        <article class="card"><div class="big-number">45</div><h3>How GenAI works</h3><p>Models, tokens, training, and why plausible output can be wrong.</p></article>
+        <article class="card"><div class="big-number">150</div><h3>Practice & activities</h3><p>Tool exploration, multimodal examples, and a team challenge.</p></article>
+      </div>
+      <p class="tag" style="margin-top: 20px">225 minutes of learning + 15-minute break</p>
+      <template class="notes"><p>“Namma schedule romba simple. First 30 minutes AI, Machine Learning, Generative AI basics. Adutha 45 minutes-la, 15 minutes concept paathuttu, 30 minutes demo-la try panni verify pannuvom. Break-kku appuram tools explore pannuvom; text mattum illa, code, image, audio maadhiri examples-um paapom. Kadaisila team challenge.”</p><p>“Technical words ellam memorize pannanum-nu illa. Oru AI output-ai eppadi question pannanum, eppadi check pannanum-nu purinjikradhu dhaan mukkiyam.”</p></template>
+    </section>
+
+    <section class="slide" aria-label="Slide 4">
+      <p class="eyebrow">01 / Core vocabulary</p>
+      <h2>AI is the broad field.<br><span class="accent">GenAI is one part of it.</span></h2>
+      <div class="grid three">
+        <article class="card"><h3>Artificial intelligence</h3><p>Methods that enable computers to perform tasks associated with perception, prediction, language, or decision support.</p></article>
+        <article class="card"><h3>Machine learning</h3><p>A family of methods that learn patterns from data to make predictions or decisions.</p></article>
+        <article class="card"><h3>Generative AI</h3><p>Models that generate new content—such as text, images, audio, or code—in response to input.</p></article>
+      </div>
+      <p style="margin-top: 18px"><strong>Useful distinction:</strong> many AI systems classify or predict; generative systems produce content.</p>
+      <template class="notes"><p>“AI-nu sonna adhu oru broad field. Andha field-kulla Machine Learning irukku; Machine Learning methods use pannra systems data-la irundhu patterns learn pannalaam. Generative AI-um indha AI landscape-oda oru part; adhu text, image, code maadhiri pudhu output generate pannum.”</p><p>“Indha categories ellam separate boxes maadhiri strict-aa nenachikka vendam. Generative AI model-um Machine Learning methods use pannalaam; aana ella AI system-um content generate pannaadhu.” Students-kitta examples kelunga: “Spam filter endha type? Text draft panra assistant endha type?”</p></template>
+    </section>
+
+    <section class="slide" aria-label="Slide 5">
+      <p class="eyebrow">Computer science connections</p>
+      <h2>Where might GenAI show up<br>in your <span class="accent">CS journey</span>?</h2>
+      <div class="grid">
+        <article class="card"><h3>Learning</h3><p>Ask for another explanation of recursion, data structures, or networking.</p></article>
+        <article class="card"><h3>Building</h3><p>Draft pseudocode, documentation, test ideas, or a small code example.</p></article>
+        <article class="card"><h3>Debugging</h3><p>Share a minimal error example and ask for hypotheses to investigate.</p></article>
+        <article class="card"><h3>Exploring</h3><p>Compare software, data, AI, cybersecurity, and research career paths.</p></article>
+      </div>
+      <template class="notes"><p>“CS student-aa irukkumbodhu, GenAI use panna neraya practical ways irukku. Recursion puriyala na innooru explanation kekkalaam; code write panna munnaadi pseudocode kekkalaam; bug vandhaa possible causes list panna sollalaam; tests-ku ideas kekkalaam.”</p><p>“Aana AI solliduchu-nu namma purinjittom-nu artham illa. Code run panni paakanum, tests pannanum, course rules follow pannanum. AI use pannina disclose panna sollirundhaa adhaiyum pannanum.” “Idhula edhu unga learning-ku useful-aa irukkum? Edhula konjam careful-aa irukkanum?” nu discuss pannunga.</p></template>
+    </section>
+
+    <section class="slide" aria-label="Slide 6">
+      <p class="eyebrow">02 / A simple mental model</p>
+      <h2>GenAI responds by generating<br>a likely <span class="accent">continuation</span>.</h2>
+      <div class="equation"><span>Your input</span><b>→</b><span>Model patterns</span><b>→</b><span>Generated output</span></div>
+      <div class="grid">
+        <article class="card"><h3>What it can do</h3><p>Use learned patterns to produce a response that fits the prompt and context.</p></article>
+        <article class="card"><h3>What it does not guarantee</h3><p>Truth, understanding, up-to-date facts, or successful execution of code.</p></article>
+      </div>
+      <template class="notes"><p>“Language model eppadi text generate pannudhu-nu oru simple mental model paapom. Namma prompt-um, conversation context-um base panni, adutha text piece enna varalaam-nu model calculate pannitu, piece by piece response create pannum. Idhu oru simplified explanation; ellaa GenAI model-um idhe method dhaan use pannudhu-nu solla mudiyadhu.”</p><p>“Image, audio models input-ai process pannra way vera irukkalaam. Mukkiyama nyabagam vechukka vendiyadhu: response prompt-um context-um depend aagum. Adhu convincing-aa irundhaalum true-nu guarantee illa.”</p></template>
+    </section>
+
+    <section class="slide" aria-label="Slide 7">
+      <p class="eyebrow">A closer look / Tokens</p>
+      <h2>Text is processed in<br><span class="accent">pieces called tokens</span>.</h2>
+      <div class="grid">
+        <article class="card"><h3>A token might be…</h3><ul><li>a whole short word</li><li>part of a longer word</li><li>punctuation or a space pattern</li></ul></article>
+        <article class="card"><h3>Why care?</h3><ul><li>Models have a context limit</li><li>Long input can be truncated or summarized</li><li>Token count is not exactly word count</li></ul></article>
+      </div>
+      <p style="margin-top: 22px">Prompt + conversation + attached context all use the model’s available context.</p>
+      <template class="notes"><p>“Model text-ai process pannumbodhu, words-ai appadiye mattum paakaama tokens-nu sollra chinna pieces-aa split pannum. Oru short word full token-aa irukkalaam; periya word parts-aa piriyalaam; punctuation-um token-aa varalaam. Exact split model-um language-um poruththu maarum.”</p><p>“Adhanaala one word equals one token-nu fixed rule illa. Context window-nu sonna, oru interaction-la model handle panna mudiyara information-oda limit. Romba periya document kuduthaa, ella details-um consider pannidum-nu assume panna koodadhu.”</p></template>
+    </section>
+
+    <section class="slide" aria-label="Slide 8">
+      <p class="eyebrow">A closer look / Training and use</p>
+      <h2>Training learns patterns.<br><span class="accent">A prompt shapes the task.</span></h2>
+      <div class="grid">
+        <article class="card"><h3>During training</h3><p>Model parameters are adjusted using training data and a learning objective. The exact process varies by model.</p></article>
+        <article class="card"><h3>During use</h3><p>The model processes the current input and generates an output. It does not automatically search the web or execute code unless connected tools are used.</p></article>
+      </div>
+      <p style="margin-top: 20px"><strong>Important:</strong> fluent output is not proof that the model retrieved a fact from a reliable source.</p>
+      <template class="notes"><p>“Training time-la, model training data use panni parameters adjust pannum; patterns learn panna try pannum. Namma prompt kudukkumbodhu, adhu training-oda same process illa. Ippo irukkira prompt-um conversation context-um base panni response generate pannudhu.”</p><p>“Innum oru important point: chat assistant automatically internet search pannum, namma laptop files paakkum, code run pannum-nu artham illa. Sila tools-la browsing, file access, code execution features irukkum; adhu product settings-um access-um poruththu. Demo paakumbodhu feature available-aa-nu check pannuvom.”</p></template>
+    </section>
+
+    <section class="slide" aria-label="Slide 9">
+      <p class="eyebrow">03 / Limitations</p>
+      <h2>A confident answer can still be<br><span class="accent">incorrect</span>.</h2>
+      <div class="grid">
+        <article class="card"><h3>Hallucination</h3><p>A response may include unsupported or invented details, even when it sounds convincing.</p></article>
+        <article class="card"><h3>In CS work, check…</h3><p>Whether code compiles, tests pass, APIs exist, versions match, and explanations fit the source material.</p></article>
+      </div>
+      <p class="tag" style="margin-top: 20px">Plausible ≠ verified</p>
+      <template class="notes"><p>“Hallucination-nu sonna, AI unsupported-aa illa thappana information-ai confident-aa present pannradhu. Answer nalla fluent-aa irukkalaam; aana adhu correct-nu proof illa. Ambiguous prompt, missing context, outdated knowledge, faulty reasoning—pala reasons-naala answer thappa varalaam.”</p><p>“For example, code-ku oru library method kekkumbodhu, method name believable-aa irundhaalum actual-aa exist aagudha-nu official documentation-la verify pannanum. Citation, version number, code behavior—important matter-na check pannitu dhaan use pannanum.”</p></template>
+    </section>
+
+    <section class="slide" aria-label="Slide 10">
+      <p class="eyebrow">Quick demonstration</p>
+      <h2>Use AI as a <span class="accent">starting point</span>,<br>not the final authority.</h2>
+      <div class="grid">
+        <article class="card"><h3>Ask</h3><p>“Explain why this loop might skip the last item. Give one small example input.”</p></article>
+        <article class="card"><h3>Then verify</h3><p>Trace the indexes, run a test, and compare the explanation with the actual code.</p></article>
+      </div>
+      <p style="margin-top: 20px">Never paste private credentials, personal records, or restricted course material into an unapproved tool.</p>
+      <template class="notes"><p>“Ippo oru chinna, harmless code example eduthu AI-kitta explain panna sollalaam. Output vandha odane nambidama, oru test case yosichu verify pannuvom. Unga private code, password, API key, personal data edhaiyum unapproved tool-la paste panna vendaam.”</p><p>Tool access illa na prepared response use pannunga. “Indha answer-la endha claim-ai test panna mudiyum? Official docs-la edhai check pannalaam?” nu students-kitta kelunga. Demo aim AI correct-nu prove pannradhu illa; namma output-ai eppadi verify pannalaam-nu kaatturadhu.</p></template>
+    </section>
+
+    <section class="slide" aria-label="Slide 11">
+      <p class="eyebrow">Guided exploration / 60 minutes</p>
+      <h2>Try one task. Compare the<br><span class="accent">output and evidence</span>.</h2>
+      <div class="grid three">
+        <article class="card"><h3>Learn</h3><p>Explain a CS concept at two levels of difficulty.</p></article>
+        <article class="card"><h3>Create</h3><p>Draft a short, clearly labeled pseudocode example.</p></article>
+        <article class="card"><h3>Review</h3><p>Ask for test cases for a simple algorithm; inspect them yourself.</p></article>
+      </div>
+      <ol style="margin-top: 22px">
+        <li>Write a task using a safe, non-sensitive example.</li>
+        <li>Check the answer against notes, documentation, or a test.</li>
+        <li>Record one strength and one limitation.</li>
+      </ol>
+      <template class="notes"><p>“Ippo neenga individual-aa illa pair-aa oru simple task choose pannunga: concept explain panna sollalaam, pseudocode draft panna sollalaam, illa toy algorithm-ku test cases kekkalaam. Answer-ai notes, documentation, illa small test use panni check pannunga. Mudinja oru strength, oru limitation note pannunga.”</p><p>Specific account, paid feature, file upload edhuvum mandatory illa. Tool access illa na screen-la kaattura example-ai review pannalaam, illa printed activity sheet use pannalaam. External tool use panna college policy follow pannunga.</p></template>
+    </section>
+
+    <section class="slide" aria-label="Slide 12">
+      <p class="eyebrow">Beyond text / Multimodal GenAI</p>
+      <h2>Some tools work with more than<br><span class="accent">text alone</span>.</h2>
+      <div class="grid three">
+        <article class="card"><h3>Images</h3><p>Generate or describe visual content; inspect for errors and stereotypes.</p></article>
+        <article class="card"><h3>Audio</h3><p>Transcribe, summarize, or generate speech where supported.</p></article>
+        <article class="card"><h3>Code & slides</h3><p>Draft examples or outlines; review accuracy, accessibility, and attribution.</p></article>
+      </div>
+      <p class="tag" style="margin-top: 22px">Demonstrate only with approved tools and non-sensitive inputs</p>
+      <template class="notes"><p>“Text mattum illaama, sila AI tools images, audio, code, slides-oda work pannum. Oru concept diagram generate pannina, labels-um arrows-um technically correct-aa irukka check pannanum. Audio summary irundhaa, source material-oda compare pannunga. Coding assistant suggestion kuduthaa, run panni test pannanum.”</p><p>Indha features product-um account-um poruththu maarum; innikki confirm pannina tools mattum demo pannunga. Ovvoru example-kku appuram, “Tool enna pannuchu? Enna thappa irukkalaam? Use panna munnaadi edhai verify pannanum?” nu students-kitta kelunga.</p></template>
+    </section>
+
+    <section class="slide" aria-label="Slide 13">
+      <p class="eyebrow">Responsible use</p>
+      <h2>Three habits for <span class="accent">safer AI use</span>.</h2>
+      <div class="grid three">
+        <article class="card"><div class="big-number">01</div><h3>Protect</h3><p>Keep personal, confidential, credential, and restricted data out of unapproved tools.</p></article>
+        <article class="card"><div class="big-number">02</div><h3>Verify</h3><p>Check important facts, citations, code, calculations, and generated media.</p></article>
+        <article class="card"><div class="big-number">03</div><h3>Be transparent</h3><p>Follow course rules and disclose AI assistance when required.</p></article>
+      </div>
+      <template class="notes"><p>“AI use pannumbodhu moonu basic habit nyabagam vechukkonga. First, protect—password, private data, restricted course material unapproved tool-la share panna koodadhu. Second, verify—important facts, code, citations check pannanum. Third, transparent-aa irunga—college rules enna solradho adha follow panni AI help use pannirundhaa disclose pannunga.”</p><p>“Oru extra safety habit unga experience-la irundhu yaaravadhu add panna virumbureengala?” Tool privacy policies-um college rules-um same illa; approved systems use pannunga. Submit panra work-ku final responsibility nammadhu dhaan.</p></template>
+    </section>
+
+    <section class="slide" aria-label="Slide 14">
+      <p class="eyebrow">Team challenge / 45 minutes</p>
+      <h2>Can your team make an AI answer<br><span class="accent">more useful—and check it</span>?</h2>
+      <div class="grid">
+        <article class="card"><h3>Choose a challenge</h3><ul><li>Explain an algorithm to a beginner</li><li>Draft test cases for a toy function</li><li>Summarize a public CS topic</li></ul></article>
+        <article class="card"><h3>Show your process</h3><ol><li>State the task and constraints</li><li>Inspect the AI output</li><li>Verify one claim or result</li><li>Share one limitation</li></ol></article>
+      </div>
+      <p style="margin-top: 18px"><strong>Success means:</strong> a useful result, a checkable verification step, and an honest limitation.</p>
+      <template class="notes"><p>“Ippo team-aa oru challenge choose pannunga: beginner-kku algorithm explain pannradhu, toy function-ku test cases create pannradhu, illa public CS topic-ai summarize pannradhu. Public illa synthetic inputs mattum use pannunga.”</p><p>“Output fluent-aa irukka-nu mattum judge panna vendaam. Idhu yaarukkaaga? Endha claim-ai verify panna mudiyum? Answer useful-aa irukka enna evidence venum?” nu yosichu, unga process-ai prepare pannunga. Activity sheet-la task cards-um reflection questions-um irukku.</p></template>
+    </section>
+
+    <section class="slide" aria-label="Slide 15">
+      <p class="eyebrow">Share back</p>
+      <h2>What did the tool do well?<br><span class="accent">What needed checking?</span></h2>
+      <div class="grid three">
+        <article class="card"><h3>Useful</h3><p>What saved effort or helped you understand?</p></article>
+        <article class="card"><h3>Uncertain</h3><p>Which statement or output did you verify?</p></article>
+        <article class="card"><h3>Responsible</h3><p>What would you avoid sharing or submitting unchanged?</p></article>
+      </div>
+      <template class="notes"><p>“Rendu moonu teams short-aa share pannalaam. Neenga enna prompt kudutheenga, AI enna answer pannuchu, adhai eppadi verify panneenga-nu sollunga. Answer correct-aa varala na adhuvum useful learning—enna assumption thappa pochu-nu share pannunga.”</p><p>Students tool output produce pannadhu mattum base panni judge panna vendaam. Avanga eppadi question pannanga, check pannanga, limitation identify pannanga-nu focus pannunga.</p></template>
+    </section>
+
+    <section class="slide" aria-label="Slide 16">
+      <p class="eyebrow">Takeaways</p>
+      <h2>Keep this mental model:<br><span class="accent">generate, then evaluate</span>.</h2>
+      <div class="grid">
+        <article class="card"><h3>Today you practiced</h3><ul><li>Distinguishing AI, ML, and GenAI</li><li>Explaining tokens and model limits</li><li>Trying text and multimodal tools</li><li>Verifying an AI-generated answer</li></ul></article>
+        <article class="card"><h3>Tomorrow</h3><p>We will design clearer prompts for CS study, code explanation, debugging, and career preparation.</p><p class="accent"><strong>Be curious. Keep your judgment.</strong></p></article>
+      </div>
+      <template class="notes"><p>“Innikki namma AI, Machine Learning, Generative AI difference paathom; tokens, context limit, hallucination pathiyum discuss pannom. Oru AI answer-ai appadiye accept pannama, test panni/source-la verify pannanum-nu practice pannom.”</p><p><strong>Exit ticket:</strong> “Innikki pudhusa therinjadhu enna? Innum unga mind-la irukkira question enna? AI use pannumbodhu follow panna pora oru rule enna?” Day1 activity sheet-um glossary-um point pannunga. “Naalaikku prompt-ai clear-aa design panni, CS learning-la eppadi use pannalaam-nu hands-on-aa paapom.”</p></template>
+    </section>
+
+    <aside class="notes" id="speaker-notes" aria-live="polite" hidden>
+      <h2>Presenter notes · Tanglish</h2>
+      <div id="notes-content"></div>
+    </aside>
+
+    <nav class="footer" aria-label="Slide controls">
+      <span id="counter">01 / 16</span>
+      <div class="progress" aria-hidden="true"><span id="progress"></span></div>
+      <span>← → navigate · N notes · F fullscreen</span>
+      <div class="controls">
+        <button type="button" id="prev" aria-label="Previous slide">←</button>
+        <button type="button" id="next" aria-label="Next slide">→</button>
+      </div>
+    </nav>
+  </main>
+  <script>
+    (() => {
+      const slides = [...document.querySelectorAll(".slide")];
+      const notesPanel = document.querySelector("#speaker-notes");
+      const notesContent = document.querySelector("#notes-content");
+      const counter = document.querySelector("#counter");
+      const progress = document.querySelector("#progress");
+      let current = 0;
+
+      function show(index) {
+        current = Math.max(0, Math.min(index, slides.length - 1));
+        slides.forEach((slide, i) => {
+          slide.classList.toggle("active", i === current);
+          slide.setAttribute("aria-hidden", String(i !== current));
+        });
+        counter.textContent = `${String(current + 1).padStart(2, "0")} / ${String(slides.length).padStart(2, "0")}`;
+        progress.style.width = `${((current + 1) / slides.length) * 100}%`;
+        const template = slides[current].querySelector(".notes");
+        notesContent.replaceChildren(template.content.cloneNode(true));
+        document.title = `${String(current + 1).padStart(2, "0")} — Day 1 Generative AI Foundations`;
+      }
+
+      document.querySelector("#prev").addEventListener("click", () => show(current - 1));
+      document.querySelector("#next").addEventListener("click", () => show(current + 1));
+
+      document.addEventListener("keydown", event => {
+        if (["ArrowRight", "PageDown", " "].includes(event.key)) {
+          event.preventDefault();
+          show(current + 1);
+        } else if (["ArrowLeft", "PageUp"].includes(event.key)) {
+          event.preventDefault();
+          show(current - 1);
+        } else if (event.key === "Home") {
+          show(0);
+        } else if (event.key === "End") {
+          show(slides.length - 1);
+        } else if (event.key.toLowerCase() === "n") {
+          notesPanel.hidden = !notesPanel.hidden;
+        } else if (event.key.toLowerCase() === "f") {
+          if (!document.fullscreenElement) document.querySelector(".deck").requestFullscreen?.();
+          else document.exitFullscreen?.();
+        } else if (event.key === "Escape" && !notesPanel.hidden) {
+          notesPanel.hidden = true;
+        }
+      });
+
+      show(0);
+    })();
+  </script>
+</body>
+</html>
