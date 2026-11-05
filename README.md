@@ -49,6 +49,7 @@ genai-training/
 │   ├── Day1-Content.md
 │   ├── Speaker-Notes-Day1.md
 │   ├── Day2-Content.md
+│   ├── Speaker-Notes-Day2.md
 │   └── Days3-5-Summary.md
 ├── slides/
 │   ├── Day1-GenAI-Foundations.html
@@ -56,19 +57,18 @@ genai-training/
 │       ├── bala-hari-profile.jpeg
 │       └── cs-visually-logo.png
 ├── activities/
-│   └── Day1-Activities.md
+│   ├── Day1-Activities.md
+│   └── Day2-Activities.md
 ├── projects/
 │   ├── Project1-CS-Course-Assistant.md
 │   └── Project2-CS-Career-Assistant.md
-├── resources/
-│   ├── AI-Tools-Comparison.md
-│   ├── Prompt-Engineering-Guide.md
-│   └── AI-Glossary.md
-└── assessments/
-    └── Assessment-Rubric.md
+└── resources/
+    ├── AI-Tools-Comparison.md
+    ├── Prompt-Engineering-Guide.md
+    └── AI-Glossary.md
 ```
 
-The [separate Day 1 speaker script](./content/Speaker-Notes-Day1.md) provides detailed Tanglish delivery guidance for the full session. The Day 1 HTML deck remains unchanged and retains its own short optional presenter notes (`N`). Keep the `slides/assets/` folder beside the HTML file when sharing the deck. Separate slide decks and activity handouts for Days 2-5 are not included; their linked content files contain the current teaching notes and activities.
+The [Day 1 speaker script](./content/Speaker-Notes-Day1.md) and [Day 2 speaker script](./content/Speaker-Notes-Day2.md) provide detailed Tanglish delivery guidance. [Day 2 content](./content/Day2-Content.md) includes an exact schedule, demonstrations, facilitator answer checks, and a presentation storyboard; the [Day 2 workbook](./activities/Day2-Activities.md) contains student exercises. The Day 1 HTML deck remains unchanged and retains its own short optional presenter notes (`N`). Keep the `slides/assets/` folder beside the HTML file when sharing the deck. Separate slide decks for Days 2-5 and activity handouts for Days 3-5 are not included.
 
 ---
 
@@ -100,20 +100,6 @@ The [separate Day 1 speaker script](./content/Speaker-Notes-Day1.md) provides de
 - **Concepts & Theory:** 20% (3 hours 45 minutes)
 - **Guided Hands-on Activities:** 60% (11 hours 15 minutes)
 - **Activities & Project Work:** 20% (3 hours 45 minutes)
-
----
-
-## 📊 Assessment
-
-| Component | Marks |
-|-----------|-------|
-| Day 1 & 2 Activities | 20 |
-| Project 1: CS Course Knowledge Assistant | 30 |
-| Project 2: CS Career Assistant | 40 |
-| Final Demonstration & Participation | 10 |
-| **Total** | **100** |
-
-Day 4 automation is an optional, ungraded extension, not a required third project.
 
 ---
 

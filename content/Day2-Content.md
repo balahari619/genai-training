@@ -1,541 +1,459 @@
-# Day 2: Prompt Engineering & AI Productivity
+# Day 2: Prompt Engineering & AI for Computer Science
 
-**Duration:** 4 hours  
-**Focus:** Effective prompts for CS study, code work, technical communication, and careers  
-**Goal:** Students learn to direct AI, verify outputs, and use it responsibly in computer science work
+**Theme:** From asking questions to directing and evaluating AI
 
----
+**Audience:** B.Sc. Computer Science students
 
-## 📋 Day 2 Schedule
+**Duration:** 4 scheduled hours, including a 15-minute break
 
-| Time | Topic | Duration |
-|------|-------|----------|
-| **09:00 - 09:30** | Prompting Foundations | 30 min |
-| **09:30 - 10:45** | Guided Prompting Workshop | 75 min |
-| **10:45 - 11:00** | *Break* | 15 min |
-| **11:00 - 11:30** | Checkable Explanations & Iteration | 30 min |
-| **11:30 - 12:15** | AI for CS Study and Careers | 45 min |
-| **12:15 - 13:00** | Prompt Challenge | 45 min |
+**Approach:** 45 minutes concepts + 135 minutes guided hands-on + 45 minutes activities
 
----
+**Prerequisites:** Day 1 AI literacy; programming experience is helpful, not required
 
-## 🎯 Learning Outcomes
+## Instructor materials
 
-By end of Day 2:
-- ✅ Write clear, effective prompts
-- ✅ Use context, examples, constraints, structured outputs, and iterative refinement
-- ✅ Use AI for academic tasks (research, writing, learning)
-- ✅ Use AI to explain, debug, document, and test code without outsourcing understanding
-- ✅ Use AI for CS career tasks (resume, portfolio, technical interview prep)
-- ✅ Understand and apply prompt iteration
+- [Detailed Tanglish speaker notes](./Speaker-Notes-Day2.md) — what to say, questions to ask, and transitions
+- [Day 2 activity workbook](../activities/Day2-Activities.md) — student tasks, submission template, and facilitator answer checks
+- [Prompt engineering reference](../resources/Prompt-Engineering-Guide.md)
 
----
+This file is the teaching plan and demonstration reference. The separate speaker-notes file is the delivery script. The presentation outline below is a storyboard, not an existing Day 2 HTML slide deck.
 
-## 📚 PART 1: Introduction to Prompt Engineering (30 min)
+## 1. Outcomes and take-home deliverables
 
-### What Makes a Prompt Good?
+By the end of Day 2, students should be able to:
 
-**The 5 Elements (Review from Guide):**
-1. **Role** - Who should AI be?
-2. **Context** - What's the situation?
-3. **Instructions** - What exactly do you want?
-4. **Examples** - Show what you want
-5. **Output Format** - How should it look?
+1. Turn an unclear request into a specific task with useful context and a checkable output.
+2. Use constraints, examples, and structured output without assuming they guarantee correctness.
+3. Ask AI for code explanations, bug hypotheses, test cases, and documentation.
+4. Verify a generated explanation with a trace, a test, or a trusted source.
+5. Refine a prompt based on an observed mismatch, rather than repeatedly saying “try again.”
+6. Use AI for study and career preparation without inventing qualifications or disclosing private information.
 
-### Demonstration: Progressive Prompt Improvement
+Each student or pair leaves with:
 
-**Iteration 1 (Vague):**
-```
-Prompt: "Write a resume"
-Output: Generic template, not useful
-```
+- A reusable toolkit of **five prompts**: concept tutor, code explainer, debugging helper, test designer, and study/career helper.
+- One completed **before → after → verification** record.
+- A worksheet containing test inputs and expected outputs for a toy function.
+- A final challenge response with evidence and one acknowledged limitation.
 
-**Iteration 2 (Better):**
-```
-Prompt: "Write a resume for a B.Sc. Computer Science student"
-Output: More specific, but still generic
-```
+These are activities, not a mandatory third workshop project. Students without account access can use the printed fallback responses below.
 
-**Iteration 3 (Strong):**
-```
-Prompt: "Act as a career coach. Draft a one-page resume for [student name],
-a final-year B.Sc. Computer Science student applying for a software
-development internship. Use only the education, skills, coursework, and
-projects I provide below. Do not invent internships, awards, metrics, or
-technical expertise.
+## 2. Exact run of show
 
-Student details:
-- Programming languages: [actual experience]
-- Relevant coursework: [actual courses]
-- Projects: [name, contribution, tools, verified result]
-- Activities or experience: [actual details]
+| Time | Duration | Segment | Learning mode |
+|---|---:|---|---|
+| 09:00–09:30 | 30 min | Recap, prompt anatomy, first demonstration | Concepts and discussion |
+| 09:30–09:45 | 15 min | Task, audience, and useful context | Guided hands-on |
+| 09:45–10:00 | 15 min | Constraints and structured output | Guided hands-on |
+| 10:00–10:15 | 15 min | Few-shot prompting | Guided hands-on |
+| 10:15–10:30 | 15 min | Code explanation and trace table | Guided hands-on |
+| 10:30–10:45 | 15 min | Debugging and test design | Guided hands-on |
+| 10:45–11:00 | 15 min | Break | — |
+| 11:00–11:15 | 15 min | Checkable evidence, uncertainty, and iteration | Concepts |
+| 11:15–11:30 | 15 min | Refine a response using a specific defect | Guided hands-on |
+| 11:30–11:45 | 15 min | Source-based CS study helper | Guided hands-on |
+| 11:45–12:00 | 15 min | Honest project description and mock interview | Guided hands-on |
+| 12:00–12:15 | 15 min | Assemble and peer-test a five-prompt toolkit | Guided hands-on |
+| 12:15–12:45 | 30 min | Prompt challenge: design, generate, verify | Activities |
+| 12:45–12:55 | 10 min | Share-back and peer review | Activities |
+| 12:55–13:00 | 5 min | Exit ticket and Day 3 bridge | Activities |
 
-Format: Plain, readable headings and concise bullets. Ask questions if
-important details are missing."
+Do not add lecture time on top of these blocks. The long practice blocks include student work, instructor coaching, and short debriefs.
 
-Output: Specific, targeted, actually useful
-```
+## 3. Preparation and access
 
-### Why This Matters
+### Before the session
 
-- **Vague prompts** = Generic, unuseful outputs
-- **Specific prompts** = Customized, valuable outputs
-- **Time saved** = Better output on first try instead of iterations
+- Test one institution-approved chat assistant and a backup. Comparing products is optional.
+- Prepare printed copies of the workbook and fallback outputs.
+- Have a timer, plain-text editor, and an approved environment for the optional Python demonstration.
+- Use the synthetic profile and original source note in this file; do not request students' actual resumes or college records.
+- Check assignment rules and explain what assistance/disclosure is allowed.
+- Prepare a visible table with columns: **Task / Prompt / Output / Verification / Limitation**.
 
----
+### Participation paths
 
-## 🛠️ PART 2: Prompting Techniques Workshop (75 min)
+| Situation | Participation |
+|---|---|
+| Students have approved access | Work individually or in pairs |
+| Only facilitator has access | Pairs write prompts; facilitator runs selected prompts |
+| No AI access/internet | Critique prepared responses; write improved prompts; manually trace code |
+| Students do not know Python | Use the pseudocode and trace worksheet; executing code is optional |
 
-### Technique 1: Role-Based Prompting (15 min)
+Never require paid plans, personal account creation, API keys, or a particular upload feature. Do not upload restricted code, credentials, private student information, or unapproved copyrighted material.
 
-**The Concept:** Assign AI a persona to get better responses
+## 4. Prompting foundations — 30 minutes
 
-**Workshop Activity:**
+### Definition
 
-Same question, different roles:
+A prompt is an instruction and the context supplied to an AI system. Prompt engineering here means designing, testing, and refining those instructions for a task. It is not a magic formula that makes all answers correct.
 
-```
-Question: "What should I do to prepare for a job interview?"
+### A practical prompt checklist
 
-WITHOUT ROLE:
-"Study company, practice common questions, wear professional clothes, be on time"
-(Generic, not personalized)
+| Element | Question | Example |
+|---|---|---|
+| Task | What do I want? | Explain binary search |
+| Audience/context | What does the learner already know? | First-year CS student familiar with arrays |
+| Constraints | What must be included or avoided? | State the sorted-input requirement; under 180 words |
+| Output | How will I use/check the answer? | Definition, trace, misconception, two questions |
+| Evidence/check | How will I verify it? | Compare the trace with a small sorted array |
 
-WITH ROLE - As a Recruiter:
-"As a recruiter, I'll tell you what impresses us: Research our company's recent 
-projects and mission... Ask us thoughtful questions about growth opportunities... 
-Prepare specific examples of your achievements... Most candidates fail by not 
-demonstrating how they add value..."
-(More insightful and experienced)
+A role such as “CS tutor” can set tone. It does not grant real expertise. Examples can clarify a pattern, but they are optional when unnecessary. Review a prompt for its suitability for the task, not how many elements it contains.
 
-WITH ROLE - As a Mentor:
-"As your mentor, I recommend: First, calm your nerves with deep breathing. 
-Research 3 specific things about the company. Prepare stories that show your 
-problem-solving... Remember, they're assessing if you're someone they'd want 
-to work with daily..."
-(More supportive and holistic)
+### Demonstration: vague → clearer → checkable
+
+**Vague**
+
+```text
+Explain binary search.
 ```
 
-**Student Exercise (10 min):**
+**Clearer**
 
-Same question to different roles:
-```
-Question: "How can I improve my writing?"
-
-Prompts:
-1. "Act as an English teacher..."
-2. "Act as a published author..."
-3. "Act as a business communication expert..."
-4. "Act as a journalist..."
-
-Compare outputs - which role gave the most useful advice for YOUR needs?
+```text
+Explain binary search to a first-year CS student who knows arrays
+but has not studied searching algorithms.
 ```
 
----
+**Checkable**
 
-### Technique 2: Few-Shot Prompting (15 min)
-
-**The Concept:** Show examples of what you want, not just describe it
-
-**Demonstration:**
-
-```
-BEFORE (Description only):
-"Create a catchy LinkedIn headline for a student"
-
-Output: "B.Sc. Computer Science | Aspiring Software Developer | Building Projects"
-(Okay, but generic)
-
-AFTER (With examples):
-"Create a catchy LinkedIn headline for a student. 
-Here's the style I like:
-
-Example 1: "B.Sc. Computer Science | Exploring Web Development | Building Projects"
-Example 2: "Final-Year CS Student | Data Structures & Python | Open to Internships"
-Example 3: "Soon-to-Graduate Psychologist | Behavioral Research Curiosity | Let's Connect"
-
-Now create one for a final-year B.Sc. Computer Science student interested in
-backend development, using only real skills and project experience."
-
-Output: "Final-Year CS Student | Exploring Backend Development | Learning by Building"
-(Much better, matches your style preferences)
+```text
+Explain binary search to a first-year CS student who knows arrays.
+Include the sorted-input requirement, a short definition, and a trace
+for finding 11 in [2, 5, 8, 11, 14].
+Use zero-based indexes and choose mid = floor((low + high) / 2).
+Then list one common misconception and two practice questions.
+Keep the explanation under 180 words. Do not claim to have run code.
 ```
 
-**Student Exercise (10 min):**
-- Students share a type of content they write often
-- Instructor creates one example
-- Student creates 2 examples of their preferred style
-- Student asks AI using few-shot prompting
-- Compare: Generic AI output vs AI output trained on examples
+**Facilitator check:** With inclusive `low/high`, start at `0/4`: midpoint 2 gives 8, then search indexes 3–4; midpoint 3 gives 11. The array must be sorted under the same ordering used for comparisons.
 
----
+Do not promise that the third prompt always produces a correct trace or exact word count. Check the actual response against the requested fields.
 
-### Technique 3: Requesting Useful, Checkable Explanations (15 min)
+## 5. Guided prompting workshop — 75 minutes
 
-**The Concept:** Ask for a concise rationale, explicit assumptions, intermediate results where useful, and checks you can verify. A generated explanation is not proof that the answer is correct.
+### Lab 1 — Task, context, and role (15 minutes)
 
-**Demonstration:**
+**Task:** Improve “Teach me recursion.”
 
-```
-Prompt: "Trace this short function on the input [example]. Show the values
-of the variables after each loop iteration, state the expected output, and
-list one edge case I should test. If the code is ambiguous, ask me first."
-```
+1. Instructor models the difference between a role and useful context (3 min).
+2. Pairs write a prompt with learner background and a specific learning goal (7 min).
+3. Run/inspect one response or critique the fallback (3 min).
+4. Record one check (2 min).
 
-**Why It Works:**
-- A clear, checkable explanation can help you inspect an answer
-- Verify code by running tests and checking behavior yourself
+**Example prompt**
 
-**Student Exercise (10 min):**
-Choose a short code example. Compare "What does this return?" with a prompt
-asking for a trace table, assumptions, and an edge-case test. Check both
-answers by running the code.
-
----
-
-### Technique 4: Structured Output Prompting (15 min)
-
-**The Concept:** Ask for output in a specific structure
-
-**Demonstration:**
-
-```
-WITHOUT STRUCTURE:
-Q: "Compare arrays and linked lists for a CS exam"
-A: Long paragraph of text, hard to study from
-
-WITH STRUCTURE:
-Q: "Compare socialism and capitalism using this table format:
-
-| Aspect | Array | Linked List |
-|--------|-----------|-----------|
-| Definition | | |
-| Who owns property | | |
-| How prices are set | | |
-| Real-world examples | | |
-| Pros | | |
-| Cons | |"
-
-Output: Perfectly formatted table, easy to study from
+```text
+Help me learn recursion. I understand loops, but recursive calls are new.
+Use the role of a patient CS tutor.
+Explain the base case and recursive case with factorial of 3.
+Show the calls and return values, then ask me two questions.
+Keep language simple, but do not say recursion always saves time.
 ```
 
-**Student Exercise (5 min):**
-- Each student prepares a study topic
-- Sends prompt WITHOUT structure
-- Sends same prompt WITH structure
-- Compares how much easier structure makes studying
+**Answer checks:** `factorial(3) = 3 × 2 × 1 = 6`; a base case stops this example's recursive chain. Recursive code is not automatically faster or simpler.
 
----
+**Discussion:** Extra personal details and invented expert credentials are not useful context. Add information only if it changes the answer needed.
 
-## 📚 PART 3: Advanced Prompting Strategies (30 min)
+### Lab 2 — Constraints and structured output (15 minutes)
 
-### Strategy 1: Iterative Refinement
+**Task:** Compare arrays and singly linked lists.
 
-**The Process:**
-
-```
-Attempt 1: Write initial prompt
-↓
-Evaluate: Is the output good?
-↓
-If NO → Ask follow-up question
-↓
-Attempt 2: Refine based on feedback
-↓
-Evaluate: Better?
-↓
-Continue until satisfied
+```text
+Compare a fixed-size array with a singly linked list for a CS study sheet.
+Assume unsorted data; for linked-list operations, distinguish whether
+the relevant node/predecessor is already known or must be found.
+Use a table: Aspect | Array | Singly linked list | Assumption.
+Include indexed access, searching, insertion, deletion, and memory layout.
+Explain in one sentence why insertion is not always O(1).
+Do not treat Python lists as identical to fixed-size arrays.
 ```
 
-**Live Example:**
+**Answer checks**
 
-```
-Attempt 1:
-Q: "Help me study for my data structures exam"
-A: Generic study tips
+- Array indexed access: typically O(1); unsorted search: O(n).
+- Linked-list indexed access/search: O(n).
+- Linked-list insertion can be O(1) given the necessary node/reference, but finding the position can cost O(n).
+- Singly linked-list deletion may need a predecessor; do not claim arbitrary-node deletion is universally O(1).
+- Arrays generally use contiguous element storage; linked lists use nodes with links and allocation overhead.
 
-Follow-up 1:
-Q: "The exam is specifically on stacks, queues, and linked lists. Give me
-practice questions that require tracing operations."
-A: Better - more specific
+**Teaching point:** A nicely formatted but incorrect table is still incorrect. Structure improves usability, not truth.
 
-Follow-up 2:
-Q: "Make the questions progressively harder (3 easy, 3 medium, 3 hard).
-Put answers and concise explanations in a separate section."
-A: Excellent - exactly what I need
-```
+### Lab 3 — Few-shot prompting (15 minutes)
 
-### Strategy 2: Constraint-Based Prompting
+**Task:** Apply an output pattern to new inputs.
 
-**The Concept:** Add limitations to force creative solutions
+```text
+Classify these toy bug reports using only one label:
+validation, calculation, or display.
 
-```
-Q: "Explain recursion"
-Output: Long, generic summary
+Examples:
+"Blank name is accepted" -> validation
+"Total is added incorrectly" -> calculation
+"Button text is cut off" -> display
 
-Q: "Explain recursion in about 100 words, with a base case, recursive case,
-and tiny example. Keep the definition technically accurate."
-Output: Concise explanation that preserves the core CS concepts
-```
+Now classify:
+1. Negative age is accepted.
+2. Final price uses the wrong tax percentage.
+3. A heading overlaps the menu.
 
-### Strategy 3: Perspective Shifting
-
-**The Concept:** Ask AI to view from different angles
-
-```
-Q: "Should I focus next on web development, data engineering, or software
-testing, given my current courses and project experience?"
-
-Different perspectives:
-1. As a career counselor: Focus on job prospects
-2. As a computer scientist: Focus on technical value
-3. As a software team lead: Focus on practical project experience
-4. As a lazy student: Focus on time investment vs payoff
-5. As your friend: Focus on your happiness
-
-This gives 5 different viewpoints to make a good decision
+Return: number | label | brief reason.
+If a report is ambiguous, say what detail is missing.
 ```
 
----
+**Expected labels:** validation, calculation, display. Reasons must match each report.
 
-## 💼 PART 4: AI for CS Study & Career Preparation (45 min)
+**Extension:** “Page crashes when I press submit” cannot reliably be assigned to one of those categories without more evidence. Asking for missing detail is acceptable.
 
-### Use Case 1: Research & Learning
+**Teaching point:** Examples guide output during the request. They do not retrain or fine-tune model parameters. Bad examples can teach the wrong pattern.
 
-**Task:** Understand a complex topic quickly
+### Lab 4 — Explain and trace code (15 minutes)
 
-**Prompt Template:**
-```
-"I need to understand [topic] for [purpose: exam/project/career].
+Use this original toy function:
 
-My current level: [What you know]
-Time available: [30 minutes/2 hours/1 day]
-Learning style: [Visual/textual/examples/practice problems]
-
-Create a learning plan that includes:
-- Key concepts to master
-- Simplified explanations
-- Real-world examples
-- Practice questions
-- Resources for deeper learning"
+```python
+def count_even(numbers):
+    count = 0
+    for index in range(len(numbers) - 1):
+        if numbers[index] % 2 == 0:
+            count += 1
+    return count
 ```
 
-**Real Example:**
-```
-"I need to understand blockchain technology for an IT seminar presentation.
+For students unfamiliar with Python:
 
-My current level: I know what Bitcoin is, but not the underlying technology
-Time available: 4 hours
-Learning style: I learn best with analogies and real examples
-
-Create a 4-hour self-study plan including:
-- 5 main concepts (explained simply)
-- Analogy for how blockchain works
-- 3 real-world applications (besides cryptocurrency)
-- Key terminology
-- How to explain it to non-technical people
-- 5 interview questions someone might ask"
+```text
+count starts at 0
+visit indexes from 0 up to, but not including, length(numbers) - 1
+if the number at the index is even, increase count by 1
+return count
 ```
 
-### Use Case 2: Assignment Help
-
-**Task:** Improve your academic work
-
-**Prompt Template:**
-```
-"I'm working on [assignment type] about [topic].
-
-My current draft: [Paste your work]
-
-Please review and:
-- Point out strengths
-- Identify weaknesses
-- Suggest improvements
-- Provide one example of how to improve a specific section
-- Rate the overall quality and how to improve further"
+```text
+Explain this function without changing it.
+Trace count_even([2, 3, 4]) in a table:
+index | value checked | count after this iteration.
+State the actual return value and the intended count of even numbers.
+Explain any mismatch. Treat the input as a list of integers.
+Do not claim you executed the function.
+[paste the toy function]
 ```
 
-### Use Case 3: Learning with Code (AI as a Pair-Programmer)
+**Facilitator answer:** It visits indexes 0 and 1, not 2. Count becomes 1, then stays 1; actual return is 1, intended count is 2. The final item is skipped.
 
-Use AI to explain code, suggest tests, and diagnose errors; do not treat generated code as correct until you understand and run it.
+**Teaching point:** A trace is a generated explanation, not execution evidence. Verify it manually or run the function in an approved environment.
 
-```
-I'm learning [language/topic]. Here is the smallest code example that shows
-the issue:
-[paste code you are allowed to share]
+### Lab 5 — Debugging and test design (15 minutes)
 
-Expected behavior: [what should happen]
-Actual behavior or error: [what happens]
-
-First explain the likely cause without changing the code. Then suggest the
-smallest fix, explain each changed line, and propose 3 tests including one
-edge case. Do not claim you ran the code.
-```
-
-**Class check:** Run the suggested code in an approved local environment or
-Colab. Compare actual results with the AI's explanation. Never paste passwords,
-API keys, private student data, or institution-owned code into an unapproved tool.
-
-### Use Case 4: Resume Building
-
-**Task:** Create a strong resume
-
-**Prompt Template:**
-```
-"Create a resume for me to apply for [job title].
-
-About me:
-- Current education: [Program, year, college]
-- Skills: [List your skills]
-- Experience: [Internships, projects, work]
-- Achievements: [Grades, awards, leadership]
-- Target company: [Company type/name]
-
-Requirements:
-- ATS-friendly format (can be parsed by resume scanners)
-- Highlight relevant skills for this role
-- Use action verbs
-- Quantify achievements where possible
-- One page
-- Professional tone"
+```text
+The intended behavior is to count all even integers in the supplied list.
+For [2, 3, 4], the function returns 1 but should return 2.
+First explain the likely cause. Then suggest the smallest fix.
+Give tests for empty input, one item, mixed values, and a negative even value.
+Return input | expected output | what the test checks.
+Do not invent execution results.
+[paste the toy function]
 ```
 
-### Use Case 5: Interview Preparation
+**Minimal fix:** Change `range(len(numbers) - 1)` to `range(len(numbers))`. Direct iteration over values is another valid solution, but is not the smallest textual change.
 
-**Task:** Prepare for job interviews
+| Input | Expected corrected result | Reason |
+|---|---:|---|
+| `[]` | 0 | Empty input |
+| `[2]` | 1 | A single even item must not be skipped |
+| `[3]` | 0 | A single odd item |
+| `[2, 3, 4]` | 2 | Mixed input with an even final item |
+| `[-2, 1, 0]` | 2 | Negative even integers and zero |
 
-**Prompt Template:**
-```
-"Conduct a mock interview with me for the position of [Job Title] at [Company Type].
+Ask students why `[2, 3]` alone is a weak regression test: the buggy and corrected functions both return 1 because the omitted final item is odd.
 
-About me: [Brief background, skills, interests]
+**Optional execution:** Run the original, apply the minimal fix, and run these inputs again. Record actual output separately from expected output. Do not install packages; the toy example uses standard Python only.
 
-Interview style: [Behavioral/Technical/Mixed]
+## 6. Checkable explanations and iteration — 30 minutes
 
-For each question:
-- Ask the question
-- Wait for my response
-- Provide constructive feedback
-- Suggest a better answer if needed
+### Explain the evidence ladder (15 minutes concepts)
 
-At the end, give overall feedback and top 3 areas for improvement."
-```
+| What you have | What it establishes |
+|---|---|
+| Fluent answer | The response sounds plausible |
+| Assumptions and trace | A proposed explanation you can inspect |
+| Source passage | Evidence for a source-specific claim, if the passage supports it |
+| Actual test output | Behavior on the tested inputs in that environment |
+| Broader tests and review | More confidence, not a universal guarantee |
 
-### Use Case 6: Content Creation
+Do not ask for hidden reasoning or assume a long “step-by-step” answer proves correctness. Ask for concise explanations, explicit assumptions, trace tables, references, or tests that you can inspect.
 
-**Task:** Create engaging study/career content
+### Run the refinement exercise (15 minutes hands-on)
 
-**Prompt Template:**
-```
-"Create [content type] about [topic] for [platform].
+**Defective prepared response**
 
-Audience: [Who should understand this]
-Goal: [Why are you creating this]
-Tone: [Professional/casual/inspiring]
-Format: [Specific requirements]
+> “Binary search works on any list. For `[2, 5, 8, 11, 14]`, it checks 8, then 14, then 11. It is always O(1).”
 
-Requirements:
-- [Specific element 1]
-- [Specific element 2]
-- Include [type of media if needed]"
-```
+Students should identify:
 
----
+1. Standard binary search needs sorted data.
+2. The stated trace does not follow the midpoint rule used in the demonstration.
+3. Binary search has O(log n) worst-case comparisons on a sorted random-access array, not universally O(1).
 
-## 🏆 PART 5: Prompt Engineering Competition (45 min)
+**Specific refinement**
 
-### Competition Structure
-
-**Challenge 1: Emoji Challenge (15 min)**
-
-Goal: Make a technical explanation clear to a non-technical audience
-
-```
-Prompt: "Explain what an API does to a non-technical college student in
-under 100 words. Use one everyday analogy, then state where the analogy
-stops being accurate."
-
-Winning answer would be creative and actually understandable
+```text
+Your answer says binary search works on any list and is always O(1).
+Correct those claims. For an ascending sorted random-access array,
+state the worst-case comparison complexity.
+Trace target 11 in [2, 5, 8, 11, 14], using zero-based indexes,
+inclusive low/high bounds, and mid = floor((low + high) / 2).
+Show low | high | mid | value | decision.
+Flag uncertainty rather than guessing.
 ```
 
-**Challenge 2: The Bad Prompt Challenge (15 min)**
+**Check:** Rows `0 | 4 | 2 | 8 | search right`, then `3 | 4 | 3 | 11 | found`.
 
-Goal: Take the worst prompt and make it the best
+**Stop rule:** Try one targeted revision and check again. If still wrong, use course notes or a trusted source and document the unresolved issue. Do not spend the whole class prompting indefinitely.
 
-Facilitator gives a vague prompt like:
-"Tell me about stuff"
+## 7. CS study and career preparation — 45 minutes
 
-Students transform it into:
-"Act as [role]. Create [specific output] for [specific audience] about [specific topic].
-Requirements: [specific needs]"
+### A. Source-based study helper (15 minutes)
 
-**Challenge 3: Real-World Scenario (15 min)**
+Use this original, permitted classroom note:
 
-Scenario: "You have an exam on data structures. Create a prompt that asks for
-a study guide with definitions, traced examples, practice questions, and a
-separate answer key. Ask the AI to flag anything not supported by your notes."
+> A stack follows last in, first out (LIFO). Push adds an item to the top; pop removes the top item. Starting with an empty stack, push A, push B, then pop removes B, leaving A. A queue follows first in, first out (FIFO). Enqueue adds an item at the rear; dequeue removes the oldest item at the front. Starting with an empty queue, enqueue A, enqueue B, then dequeue removes A, leaving B.
 
-Judging Criteria:
-- Clarity and specificity
-- Would this actually help you study?
-- Covers all important elements
+```text
+Use only the classroom note below.
+Create a study sheet with:
+1. A stack/queue comparison table.
+2. One traced example for each.
+3. Two practice questions, with answers in a separate section.
+4. A section called "Not covered by this note".
+Do not invent exam dates, syllabus topics, or implementation complexities.
+[paste the classroom note]
+```
 
----
+**Checks:** Stack removes B; queue removes A. The note does not specify exam dates, course requirements, or operation complexities.
 
-## 📝 Key Takeaways for Day 2
+**Out-of-source test:** “When is my data structures exam?” The assistant should say the supplied note does not provide it, not invent a date.
 
-### ✅ Prompt Engineering Principles
+**Bridge to Day 3:** Supplying a short note in a prompt introduces source grounding. A document workspace can manage more sources, but neither method eliminates the need to check answers.
 
-1. **Specificity:** More details = better output
-2. **Role:** AI responds better with a persona
-3. **Structure:** Specify format for usable output
-4. **Examples:** Show what you want, not just describe
-5. **Iteration:** Refine based on first response
+### B. Honest project description and mock interview (15 minutes)
 
-### 🎯 Real Applications for Students
+**Synthetic profile**
 
-- Research and learning
-- Code explanation, debugging, test design, and technical documentation
-- Assignment improvement
-- Resume and cover letter writing
-- Interview preparation
-- Content creation for presentations
+- Final-year B.Sc. CS student.
+- Knows basic Python and SQL; no internship experience.
+- Built a command-line library tracker as a course project.
+- Personal contribution: menu handling and input validation.
+- Project testing: five manual test cases; no measured user or business impact.
 
-### 💡 Common Mistakes to Avoid
+```text
+Using only the synthetic profile below, write two resume bullets
+for an entry-level software internship.
+Do not invent internships, expert-level skills, usage numbers,
+awards, or performance improvements.
+If evidence is missing, ask a question rather than adding a metric.
+[paste the profile]
+```
 
-❌ Being vague about what you want  
-❌ Not providing enough context  
-❌ Asking multiple questions at once  
-❌ Trusting AI answers without verification  
-❌ Not iterating to improve responses  
+**Acceptable example**
 
----
+- Implemented menu handling and input validation for a command-line library tracker course project.
+- Checked project behavior using five manual test cases.
 
-## 📊 Self-Assessment: Prompt Quality Rubric
+**Reject:** “Improved library operations by 40%” or “Led production deployment for 500 users.” The profile does not support those claims.
 
-Rate your prompts:
+**Interview prompt**
 
-| Aspect | Poor | Good | Excellent |
-|--------|------|------|-----------|
-| **Clarity** | Vague, confusing | Clear intention | Crystal clear, specific |
-| **Role/Context** | Missing | Mentioned | Detailed and relevant |
-| **Format** | Not specified | Partially specified | Fully detailed |
-| **Examples** | None | One | Multiple |
-| **Actionability** | Generic | Relevant | Immediately useful |
+```text
+Help me practice an entry-level CS interview using the synthetic profile.
+Ask one question at a time about input validation or my project contribution.
+Wait for my answer before giving brief feedback.
+Then ask one follow-up question.
+Do not pretend this is an actual hiring decision.
+```
 
-Aim for "Excellent" on all fronts!
+Role recommendations and career plans are suggestions to check against actual job postings, not promises of employment. No resume formatting or “ATS” claim guarantees selection.
 
----
+### C. Assemble and peer-test the toolkit (15 minutes)
 
-## 🎤 Facilitator Tips for Day 2
+Students save five reusable prompts with placeholders:
 
-1. **Live Demonstrations:** Show bad → good prompts in real-time
-2. **Pair Work:** Have students work together on prompt refinement
-3. **Share Wins:** Celebrate great prompts from students
-4. **Competition Energy:** Make the competition fun and supportive
-5. **Real Stakes:** Use real assignments they need help with
-6. **Iterative:** Show multiple iterations of the same prompt
+| Prompt | Required placeholders/check |
+|---|---|
+| Concept tutor | Topic, learner level, example, understanding check |
+| Code explainer | Safe snippet, input, trace, no invented execution |
+| Debugging helper | Intended behavior, actual behavior, smallest fix |
+| Test designer | Behavior contract, edge cases, expected results |
+| Study/career helper | Permitted source or verified profile, unsupported-claim constraint |
 
----
+Peer-test one prompt by changing the topic/input. A reusable prompt should not accidentally depend on facts from an earlier conversation. Include the necessary input again when starting a fresh chat.
 
-**Next:** Day 3 - Build and evaluate a document-grounded CS course assistant
+## 8. Final prompt challenge — 45 minutes
+
+Follow the [workbook](../activities/Day2-Activities.md).
+
+### Choose one task
+
+- Explain an API to a beginner with an analogy and its limitation.
+- Produce a study sheet from the stack/queue note, with a separate answer key.
+- Diagnose the toy counting bug and propose discriminating tests.
+
+### Timing
+
+- 5 min: Choose task and write acceptance criteria.
+- 10 min: Draft prompt and obtain/inspect an output.
+- 10 min: Verify a claim or result and make one targeted revision.
+- 5 min: Document final response and remaining limitation.
+- 10 min: Share-back and peer review.
+- 5 min: Exit ticket.
+
+### Peer-feedback checklist
+
+- Does the prompt match the task and audience?
+- Are necessary assumptions and constraints explicit?
+- Can the response be checked?
+- Did the team actually verify something?
+- Are limitations and missing evidence acknowledged?
+
+Focus feedback on usefulness and verification, not prompt length, more roles, paid tool access, or a prettier output.
+
+## 9. Presentation storyboard
+
+These teaching beats match the separate speaking script:
+
+1. Welcome back: generate, then evaluate.
+2. What students will create today.
+3. A prompt is a task description, not a magic spell.
+4. Vague → clearer → checkable.
+5. Roles and useful context.
+6. Constraints and structured responses.
+7. Few-shot examples: patterns, not retraining.
+8. Code explanation: inspect a trace.
+9. Debugging: intended versus actual.
+10. Test cases that reveal a bug.
+11. Evidence and targeted refinement.
+12. Study using supplied sources.
+13. Honest career assistance and interview practice.
+14. Build a five-prompt toolkit.
+15. Challenge and share-back.
+16. Recap and the Day 3 source-grounded project.
+
+## 10. Completion checklist
+
+- [ ] Student completed a before/after prompt record.
+- [ ] Student verified at least one technical claim, source claim, or test result.
+- [ ] Test worksheet includes expected outputs and an edge case.
+- [ ] Toolkit contains five reusable prompts, with necessary inputs/placeholders.
+- [ ] Student can explain why roles, examples, and formatting do not guarantee correctness.
+- [ ] Student can distinguish generated explanations from actual execution evidence.
+- [ ] Student followed institutional AI-use and privacy rules.
+
+**Exit questions**
+
+1. Which missing detail most improved your prompt?
+2. What did you verify, and how?
+3. What would you do if a targeted follow-up still produced an incorrect answer?
+
+**Optional homework:** Improve one toolkit prompt using a permitted course topic. Bring one output, one verification, and one uncertainty.
+
+**Next:** [Day 3 — CS Course Knowledge Assistant](../projects/Project1-CS-Course-Assistant.md).

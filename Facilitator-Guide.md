@@ -14,7 +14,7 @@
 - [ ] Ensure stable internet (critical!)
 - [ ] Set up projector + laptops for demos
 - [ ] Create student roster and attendance tracker
-- [ ] Print materials (glossary, rubrics, checklists)
+- [ ] Print materials (glossary, activity workbooks, checklists)
 
 **Technical Preparation:**
 - [ ] Confirm institution-approved AI chat and document-grounded tools
@@ -48,7 +48,7 @@
 
 - [ ] Test the selected instructor demo tools and backup materials
 - [ ] Save workshop materials and prepared offline examples locally
-- [ ] Print checklists, rubrics, assessment forms
+- [ ] Print checklists and activity workbooks
 - [ ] Set up classroom (seats for pairs, projector, speaker)
 - [ ] Test microphone and audio
 - [ ] Create day-by-day checklist for yourself
@@ -423,7 +423,6 @@ Overall Notes: [Support needed, strengths, progress]
 
 - [ ] Collect all submissions (both projects)
 - [ ] Give written feedback on each project
-- [ ] Calculate final grades
 - [ ] Give certificates/completion verification
 - [ ] Collect feedback survey from students
 - [ ] Send thank you email
@@ -466,7 +465,6 @@ Ask students to rate:
 - [ ] Printed Day 1-5 content (one per student)
 - [ ] AI Glossary (printed)
 - [ ] Prompt Engineering Guide (printed)
-- [ ] Assessment Rubric (for reference)
 - [ ] Notebooks and pens for each student
 - [ ] Backup printed slides
 

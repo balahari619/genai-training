@@ -475,44 +475,6 @@ Students ask:
 
 ---
 
-## 📊 Final Workshop Assessment
-
-### Assessment Components
-
-| Component | Marks | Details |
-|-----------|-------|---------|
-| Day 1 & 2 Activities | 20 | Participation, prompt quality, CS use cases, verification |
-| Project 1: CS Course Knowledge Assistant | 30 | Source quality, grounding checks, limitations, demo |
-| Project 2: CS Career and Technical Interview Assistant | 40 | Useful instructions, realistic tests, accuracy, reflection |
-| Final Participation & Demo | 10 | Engagement, clear presentation, Q&A |
-| **Total** | **100** | - |
-
-The Day 4 workflow build is an optional, ungraded extension. Students may
-complete the workflow design activity without creating accounts or connecting
-live services.
-
-### Success Criteria
-
-**Minimum Passing (70+):**
-- Completed both projects
-- Demonstrated understanding of concepts
-- Participated in activities
-
-**Strong Performance (85+):**
-- Both projects well-executed
-- Creative use of tools
-- Clear explanations
-- Good presentations
-
-**Excellent (95+):**
-- High-quality projects
-- Innovative applications
-- Clear understanding of limitations
-- Inspiring presentations
-- Helps peers learn
-
----
-
 ## 🎓 Final Deliverables
 
 By end of Day 5, each student will have:

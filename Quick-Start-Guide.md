@@ -94,20 +94,22 @@ Download this folder to your computer:
 
 **Key Materials:**
 - `content/Day2-Content.md` - Full lecture notes
+- `content/Speaker-Notes-Day2.md` - Separate detailed Tanglish delivery script
+- `activities/Day2-Activities.md` - Student workbook, challenge template, and answer checks
 - `resources/Prompt-Engineering-Guide.md` - Complete guide (print for students)
 - Sample prompts throughout
 
 **Prep:**
 - [ ] Read Day2-Content.md
-- [ ] Prepare 5 bad/good prompt pairs
-- [ ] Have competition prompts ready
+- [ ] Prepare the binary-search comparison, toy counting function, and printed fallback responses
+- [ ] Have the stack/queue source note, synthetic career profile, and challenge workbook ready
 - [ ] Prepare prizes for competition (optional)
 
 **In Class:**
-- Show: 5 iterations of the same prompt
-- Have students: Write and compare prompts in pairs
-- Competition: Which student writes the BEST prompt?
-- End with: Students have personal toolkit
+- Demonstrate: Vague → clearer → checkable prompt
+- Have students: Compare, trace, debug, and design tests using synthetic examples
+- Challenge: Evaluate task fit, verification, and honest limitations, not prompt length
+- End with: Students save five reusable prompts and a before/after verification record
 
 ---
 
@@ -369,7 +371,7 @@ Let's go!"
 | 2 | Day2-Content.md | Prompt-Engineering-Guide.md | Institution-approved AI assistants |
 | 3 | Project1-CS-Course-Assistant.md | Days3-5-Summary.md | Approved document-grounded workspace |
 | 4 | Days3-5-Summary.md | - | Workflow diagram; optional approved platform |
-| 5 | Days3-5-Summary.md | Assessment-Rubric.md | Institution-approved AI assistants |
+| 5 | Days3-5-Summary.md | Project2-CS-Career-Assistant.md | Institution-approved AI assistants |
 
 ---
 

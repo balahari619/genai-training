@@ -222,7 +222,7 @@ During Day 3, demonstrate your assistant:
 
 ### Success Metrics
 
-| Criterion | Full Marks | Partial | Needs Work |
+| Criterion | Ready | In Progress | Needs Work |
 |-----------|-----------|---------|-----------|
 | **Sources Selected** | 3-4 current, permitted CS sources | 2-3 suitable sources | Missing or unsuitable |
 | **Workspace Setup** | Sources processed and scope clear | Works with minor issues | Not ready to test |
